@@ -1,12 +1,24 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/pages/UserSignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
+<<<<<<< HEAD
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
   runApp(SignIn());
+=======
+
+  await Firebase.initializeApp();
+
+  String? token = await FirebaseMessaging.instance.getToken();
+  print('FCM token:' + token!);
+
+  runApp(const MyApp());
+>>>>>>> 9f051b964da4e902b465e64050e5d4012136ecb5
 }
 
 class MyApp extends StatelessWidget {

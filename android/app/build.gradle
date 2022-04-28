@@ -22,6 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -36,9 +37,13 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.the_coffee_and_code"
+<<<<<<< HEAD
         //minSdkVersion flutter.minSdkVersion
         minSdkVersion 19
         multiDexEnabled true
+=======
+        minSdkVersion 19
+>>>>>>> 9f051b964da4e902b465e64050e5d4012136ecb5
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -55,4 +60,10 @@ android {
 
 flutter {
     source '../..'
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
 }
