@@ -30,4 +30,26 @@ class BrunchClubModel {
 //        .where('userId', isEqualTo: _uid)
         .snapshots();
   }
+
+  dbInsertJournal(String body, int date, String title, String userID) async {
+    return await firestoreInstance
+        .collection('journal')
+        .doc(date.toString())
+        .set({'title': title, 'body': body, 'date': date, 'userId': '$_uid'});
+  }
+
+  dbRemoveJournal(String collection, String title, String userID) async {
+    var journalInstance = await firestoreInstance
+        .collection('journal')
+        .where('userId', isEqualTo: _uid)
+        .where('title', isEqualTo: title)
+        .limit(1)
+        .get();
+
+    var docID = journalInstance.docs.first.id;
+    return await firestoreInstance
+        .collection(collection)
+        .doc(docID)
+        .delete();
+  }
 }
