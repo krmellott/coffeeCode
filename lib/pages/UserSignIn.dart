@@ -16,17 +16,25 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          width: 1000,
-          height: 5000,
-          decoration: BoxDecoration(color: Colors.black),
-          child: SingleChildScrollView(
-              child: Center(
-                  child: Column(
-            children: <Widget>[_createTextFields(), _createSendButton(context)],
-          )))),
-    );
+    return MaterialApp(
+        theme: ThemeData(
+          primaryColor: Colors.green,
+        ),
+        home: Builder(
+            builder: (context) => Scaffold(
+                  body: Container(
+                      width: 1000,
+                      height: 5000,
+                      decoration: BoxDecoration(color: Colors.black),
+                      child: SingleChildScrollView(
+                          child: Center(
+                              child: Column(
+                        children: <Widget>[
+                          _createTextFields(),
+                          _createSendButton(context)
+                        ],
+                      )))),
+                )));
   }
 
   _createTextFields() {
