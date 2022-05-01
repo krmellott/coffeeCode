@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:the_coffee_and_code/pages/coffee_journal_page.dart';
+import 'package:the_coffee_and_code/pages/coffee_time_page.dart';
 
 import '../utils/buttons.dart';
 
@@ -30,11 +33,26 @@ class _SignInState extends State<SignIn> {
                           child: Center(
                               child: Column(
                         children: <Widget>[
+                          _createLogo(),
                           _createTextFields(),
                           _createSendButton(context)
                         ],
                       )))),
                 )));
+  }
+
+  _createLogo() {
+    return Container(
+        margin: const EdgeInsets.only(left: 10, right: 10, top: 200),
+        child: Column(children: [
+          const Text("Brunch Club Coffee",
+              textScaleFactor: 2,
+              style: TextStyle(
+                  //fontSize: 32,
+                  color: Color.fromARGB(255, 0, 255, 0),
+                  fontFamily: 'BrokenConsole')),
+          Image.asset('assets/BC_CoffeeLogo.png')
+        ]));
   }
 
   _createTextFields() {
@@ -43,8 +61,11 @@ class _SignInState extends State<SignIn> {
         Container(
             margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: TextField(
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
-              decoration: InputDecoration(
+              style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromARGB(225, 0, 255, 0)),
+              decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Color.fromARGB(255, 0, 255, 0), width: 3.0),
@@ -54,6 +75,10 @@ class _SignInState extends State<SignIn> {
                         color: Color.fromARGB(225, 0, 255, 0), width: 2.0),
                   ),
                   labelText: 'Please enter your email!',
+                  labelStyle: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w400,
+                      color: Color.fromARGB(225, 0, 255, 0)),
                   filled: true,
                   fillColor: Colors.black),
               onChanged: (String? email) {
@@ -65,9 +90,12 @@ class _SignInState extends State<SignIn> {
         Container(
             margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: TextField(
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+              style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromARGB(225, 0, 255, 0)),
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                       color: Color.fromARGB(225, 0, 255, 0), width: 3.0),
@@ -76,6 +104,10 @@ class _SignInState extends State<SignIn> {
                     borderSide: BorderSide(
                         color: Color.fromARGB(225, 0, 255, 0), width: 2.0)),
                 labelText: 'Password',
+                labelStyle: const TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromARGB(225, 0, 255, 0)),
                 filled: true,
                 fillColor: Colors.black,
               ),
@@ -100,25 +132,22 @@ class _SignInState extends State<SignIn> {
   }
 
   _onSignIn(BuildContext context) async {
+    print("User trying to sign in!");
     try {
       final user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _userEmail, password: _userPass);
       if (user.user!.uid != "") {
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (BuildContext context) {
-        //   return Home();
-        print('going to next page');
-        //}
-        //));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return CoffeeTime();
+        }));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        print("user wasn't found");
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        print("incorrect password");
       }
-    } finally {
-      //  print(userCredential.user.uid);
-    }
+    } finally {}
   }
 }

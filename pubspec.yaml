@@ -60,7 +60,16 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+
+  assets:
+    - assets/BC_CoffeeLogo.png
+
   uses-material-design: true
+  
+  fonts:
+    - family: BrokenConsole
+      fonts:
+        - asset: ./assets/BrokenConsoleBold-Yza7v.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

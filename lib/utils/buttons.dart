@@ -15,12 +15,21 @@ class MyButton extends StatelessWidget {
         height: 50,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.blue,
-        ),
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.black,
+            border: Border(
+                top:
+                    BorderSide(color: Color.fromARGB(255, 0, 255, 0), width: 2),
+                left:
+                    BorderSide(color: Color.fromARGB(255, 0, 255, 0), width: 2),
+                right:
+                    BorderSide(color: Color.fromARGB(255, 0, 255, 0), width: 2),
+                bottom: BorderSide(
+                    color: Color.fromARGB(255, 0, 255, 0), width: 2))),
         child: Text(
           label,
-          style: TextStyle(fontSize: 15.0, color: Colors.white),
+          style:
+              TextStyle(fontSize: 16.0, color: Color.fromARGB(255, 0, 255, 0)),
         ),
       ),
     );
