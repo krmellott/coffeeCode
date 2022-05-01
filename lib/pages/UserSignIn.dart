@@ -35,7 +35,8 @@ class _SignInState extends State<SignIn> {
                         children: <Widget>[
                           _createLogo(),
                           _createTextFields(),
-                          _createSendButton(context)
+                          _createSendButton(context),
+                          _createAutoSignIn(context)
                         ],
                       )))),
                 )));
@@ -124,7 +125,7 @@ class _SignInState extends State<SignIn> {
   _createSendButton(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
-        child: MyButton(
+        child: ConsoleButton(
             label: 'Log In!',
             onTap: () {
               _onSignIn(context);
@@ -149,5 +150,34 @@ class _SignInState extends State<SignIn> {
         print("incorrect password");
       }
     } finally {}
+  }
+
+  _createAutoSignIn(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: ConsoleButton(
+            label: 'dev login',
+            onTap: () {
+              _devSignIn(context);
+            }));
+  }
+
+  _devSignIn(BuildContext context) async {
+    try {
+      final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'testuser@gmail.com', password: 'test123');
+      if (user.user!.uid != "") {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return CoffeeTime();
+        }));
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 }
