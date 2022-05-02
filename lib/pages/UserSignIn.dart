@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:the_coffee_and_code/pages/AccountPages/User_CreateAccount.dart';
+import 'package:the_coffee_and_code/pages/AccountPages/user_createaccount.dart';
 import 'package:the_coffee_and_code/pages/coffee_time_page.dart';
 
 import '../utils/buttons.dart';
-import 'AccountPages/User_ForgotPassword.dart';
+import 'AccountPages/user_forgotpassword.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class _SignInState extends State<SignIn> {
     return Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 200),
         child: Column(children: [
-          const Text("Brunch Club Coffee",
+          const Text("Coffee & Code",
               textScaleFactor: 2,
               style: TextStyle(
                   //fontSize: 32,
