@@ -22,12 +22,20 @@ class _CoffeeTime extends State<CoffeeTime> {
       ),
       body: Center(
         child: Container(
-          decoration: const BoxDecoration(),
+          decoration: const BoxDecoration(color: Colors.black),
           child: Column(children: [
             Row(
               children: [
                 DropdownButton<String>(
                     hint: const Text('Choose a Time'),
+                    style:
+                        const TextStyle(color: Color.fromARGB(255, 0, 255, 0),
+                        fontFamily: 'CutiveMono'),
+                    dropdownColor: Colors.black,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Color.fromARGB(255, 0, 255, 0),
+                    ),
                     items: <String>[
                       'In the morning',
                       'Before coding',
@@ -77,28 +85,27 @@ class _CoffeeTime extends State<CoffeeTime> {
 
   Widget _displayCupsAndHours(BuildContext context, DocumentSnapshot doc) {
     var docData = doc.data() as Map<String, dynamic>;
-
     return Padding(
         padding: const EdgeInsets.all(1.0),
         child: Card(
           color: Colors.black,
-          child: Row(
-            children: [
-              Padding(
-                  padding: const EdgeInsets.only(),
-                  child: Text(
-                    'Cups of Coffee per Day: ' +
-                        docData['coffeeCupsPerDay'].toString(),
-                    style: const TextStyle(color: Colors.lightGreenAccent),
-                  )),
-              Padding(
-                  padding: const EdgeInsets.only(),
-                  child: Text(
-                    'Coding Hours: ' + docData['codingHours'].toString(),
-                    style: const TextStyle(color: Colors.lightGreenAccent),
-                  )),
-            ],
+          child: ListTile(
+            title: Text(
+              "Cups of Coffee per Day: " +
+                  docData['coffeeCupsPerDay'] +
+                  "\n" +
+                  "Coding Hours: " +
+                  docData['codingHours'],
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 0, 255, 0),
+                  fontFamily: 'CutiveMono'),
+            ),
           ),
+          margin: const EdgeInsets.all(20),
+          shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 255, 0), width: 1)),
         ));
   }
 
@@ -107,17 +114,23 @@ class _CoffeeTime extends State<CoffeeTime> {
       case 'Coffee cups ascending':
         return Expanded(
           child: StreamBuilder(
-            stream: reference
-                .orderedUserDataWithSort('coffeeCupsPerDay', true)
-                .where((coffeeTime) => false),
+            stream: reference.orderedUserDataWithSort('coffeeCupsPerDay', true),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading');
               } else {
+                List sortedItems = [];
+                for (int i = 0; i < 100; i++) {
+                  String coffeesTime =
+                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  if (coffeesTime == time) {
+                    sortedItems.add(snapshot.data.docs[i]);
+                  }
+                }
                 return ListView.builder(
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context, index) => _displayCupsAndHours(
-                        context, snapshot.data.docs[index]));
+                    itemCount: sortedItems.length,
+                    itemBuilder: (context, index) =>
+                        _displayCupsAndHours(context, sortedItems[index]));
               }
             },
           ),
@@ -125,17 +138,24 @@ class _CoffeeTime extends State<CoffeeTime> {
       case 'Coffee cups descending':
         return Expanded(
           child: StreamBuilder(
-            stream: reference
-                .orderedUserDataWithSort('coffeeCupsPerDay', false)
-                .where((coffeeTime) => false),
+            stream:
+                reference.orderedUserDataWithSort('coffeeCupsPerDay', false),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading');
               } else {
+                List sortedItems = [];
+                for (int i = 0; i < 100; i++) {
+                  String coffeesTime =
+                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  if (coffeesTime == time) {
+                    sortedItems.add(snapshot.data.docs[i]);
+                  }
+                }
                 return ListView.builder(
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context, index) => _displayCupsAndHours(
-                        context, snapshot.data.docs[index]));
+                    itemCount: sortedItems.length,
+                    itemBuilder: (context, index) =>
+                        _displayCupsAndHours(context, sortedItems[index]));
               }
             },
           ),
@@ -143,17 +163,23 @@ class _CoffeeTime extends State<CoffeeTime> {
       case 'Coding hours ascending':
         return Expanded(
           child: StreamBuilder(
-            stream: reference
-                .orderedUserDataWithSort('codingHours', true)
-                .where((coffeeTime) => false),
+            stream: reference.orderedUserDataWithSort('codingHours', true),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading');
               } else {
+                List sortedItems = [];
+                for (int i = 0; i < 100; i++) {
+                  String coffeesTime =
+                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  if (coffeesTime == time) {
+                    sortedItems.add(snapshot.data.docs[i]);
+                  }
+                }
                 return ListView.builder(
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context, index) => _displayCupsAndHours(
-                        context, snapshot.data.docs[index]));
+                    itemCount: sortedItems.length,
+                    itemBuilder: (context, index) =>
+                        _displayCupsAndHours(context, sortedItems[index]));
               }
             },
           ),
@@ -161,17 +187,23 @@ class _CoffeeTime extends State<CoffeeTime> {
       case 'Coding hours descending':
         return Expanded(
           child: StreamBuilder(
-            stream: reference
-                .orderedUserDataWithSort('codingHours', true)
-                .where((coffeeTime) => false),
+            stream: reference.orderedUserDataWithSort('codingHours', true),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading');
               } else {
+                List sortedItems = [];
+                for (int i = 0; i < 100; i++) {
+                  String coffeesTime =
+                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  if (coffeesTime == time) {
+                    sortedItems.add(snapshot.data.docs[i]);
+                  }
+                }
                 return ListView.builder(
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context, index) => _displayCupsAndHours(
-                        context, snapshot.data.docs[index]));
+                    itemCount: sortedItems.length,
+                    itemBuilder: (context, index) =>
+                        _displayCupsAndHours(context, sortedItems[index]));
               }
             },
           ),
