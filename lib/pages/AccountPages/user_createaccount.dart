@@ -34,7 +34,7 @@ class _CreateAccountState extends State<CreateAccount> {
       body: Container(
           width: 1000,
           height: 5000,
-          decoration: BoxDecoration(color: Colors.black),
+          decoration: const BoxDecoration(color: Colors.black),
           child: SingleChildScrollView(
               child: Center(
                   child: Column(
@@ -178,9 +178,9 @@ class _CreateAccountState extends State<CreateAccount> {
             email: _userEmail, password: _userPass);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
+          _alertDialog(context, 'Your password was too weak!');
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
+          _alertDialog(context, 'This email is already in use!');
         }
       }
     } else if (_userPass != _userPassVerification) {
@@ -195,7 +195,7 @@ class _CreateAccountState extends State<CreateAccount> {
   _alertDialog(BuildContext context, String body) {
     showDialog<String>(
         context: context,
-        barrierColor: Color.fromRGBO(0, 255, 0, 0.5),
+        barrierColor: const Color.fromRGBO(0, 255, 0, 0.5),
         builder: (BuildContext context) => AlertDialog(
               title: Text('Warning!', style: consoleTextHeader),
               content: Text(body, style: consoleTextBody),

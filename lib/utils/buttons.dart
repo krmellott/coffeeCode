@@ -20,7 +20,7 @@ class MyButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: TextStyle(fontSize: 15.0, color: Colors.white),
+          style: const TextStyle(fontSize: 15.0, color: Colors.white),
         ),
       ),
     );
@@ -44,7 +44,7 @@ class ConsoleButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: Colors.black,
-            border: Border(
+            border: const Border(
                 top:
                     BorderSide(color: Color.fromARGB(255, 0, 255, 0), width: 2),
                 left:
@@ -55,8 +55,8 @@ class ConsoleButton extends StatelessWidget {
                     color: Color.fromARGB(255, 0, 255, 0), width: 2))),
         child: Text(
           label,
-          style:
-              TextStyle(fontSize: 16.0, color: Color.fromARGB(255, 0, 255, 0)),
+          style: const TextStyle(
+              fontSize: 16.0, color: Color.fromARGB(255, 0, 255, 0)),
         ),
       ),
     );

@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:the_coffee_and_code/pages/AccountPages/User_CreateAccount.dart';
-import 'package:the_coffee_and_code/pages/coffee_journal_page.dart';
 import 'package:the_coffee_and_code/pages/coffee_time_page.dart';
 
 import '../utils/buttons.dart';
@@ -40,7 +38,7 @@ class _SignInState extends State<SignIn> {
                   body: Container(
                       width: 1000,
                       height: 5000,
-                      decoration: BoxDecoration(color: Colors.black),
+                      decoration: const BoxDecoration(color: Colors.black),
                       child: SingleChildScrollView(
                           child: Center(
                               child: Column(
@@ -154,7 +152,7 @@ class _SignInState extends State<SignIn> {
       if (user.user!.uid != "") {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
-          return CoffeeTime();
+          return const CoffeeTime();
         }));
       }
     } on FirebaseAuthException catch (e) {
@@ -183,7 +181,7 @@ class _SignInState extends State<SignIn> {
       if (user.user!.uid != "") {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
-          return CoffeeTime();
+          return const CoffeeTime();
         }));
       }
     } on FirebaseAuthException catch (e) {
@@ -199,7 +197,7 @@ class _SignInState extends State<SignIn> {
     return Container(
         margin: const EdgeInsets.only(left: 10, right: 10),
         child: TextButton(
-          child: Text("Don't have an account? Sign up here!",
+          child: const Text("Don't have an account? Sign up here!",
               style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
@@ -208,7 +206,7 @@ class _SignInState extends State<SignIn> {
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
-              return CreateAccount();
+              return const CreateAccount();
             }));
           },
         ));
@@ -218,7 +216,7 @@ class _SignInState extends State<SignIn> {
     return Container(
         margin: const EdgeInsets.only(left: 10, right: 10),
         child: TextButton(
-          child: Text("Forgot Password?",
+          child: const Text("Forgot Password?",
               style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
@@ -227,7 +225,7 @@ class _SignInState extends State<SignIn> {
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
-              return ForgotPassword();
+              return const ForgotPassword();
             }));
           },
         ));
@@ -236,7 +234,7 @@ class _SignInState extends State<SignIn> {
   _alertDialog(BuildContext context, String errorCode) {
     showDialog<String>(
         context: context,
-        barrierColor: Color.fromRGBO(0, 255, 0, 0.5),
+        barrierColor: const Color.fromRGBO(0, 255, 0, 0.5),
         builder: (BuildContext context) => AlertDialog(
               title: Text('Warning!', style: consoleTextHeader),
               content: Text('Unable to sign in! Error: ' + errorCode,

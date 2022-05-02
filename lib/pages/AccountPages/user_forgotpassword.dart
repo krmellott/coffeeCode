@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +30,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: Container(
           width: 1000,
           height: 5000,
-          decoration: BoxDecoration(color: Colors.black),
+          decoration: const BoxDecoration(color: Colors.black),
           child: SingleChildScrollView(
               child: Center(
                   child: Column(
@@ -122,7 +120,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   _alertDialog(BuildContext context, String errorCode) {
     showDialog<String>(
         context: context,
-        barrierColor: Color.fromRGBO(0, 255, 0, 0.5),
+        barrierColor: const Color.fromRGBO(0, 255, 0, 0.5),
         builder: (BuildContext context) => AlertDialog(
               title: Text('Warning!', style: consoleTextHeader),
               content: Text(
