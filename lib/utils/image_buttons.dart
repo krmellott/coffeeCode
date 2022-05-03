@@ -31,7 +31,7 @@ class ImageButton extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Colors.green,
+                  color: Color.fromARGB(225, 0, 255, 0),
                 ),
               )
             ]),
