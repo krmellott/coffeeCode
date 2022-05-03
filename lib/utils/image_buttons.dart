@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class ImageButton extends StatelessWidget {
   final String label;
   final String image;
@@ -12,7 +14,7 @@ class ImageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Card(
-        color: Colors.black,
+        color: theme.backgroundColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         child: Column(
           // alignment: Alignment.center,
@@ -28,10 +30,10 @@ class ImageButton extends StatelessWidget {
               ),
               Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Color.fromARGB(225, 0, 255, 0),
+                  color: theme.textColor,
                 ),
               )
             ]),

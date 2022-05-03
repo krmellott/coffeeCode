@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 
 import '../controller/BCController.dart';
+import '../main.dart';
 
 class AddEntry extends StatefulWidget {
   const AddEntry({Key? key}) : super(key: key);
@@ -20,22 +21,23 @@ class _AddEntry extends State<AddEntry> {
 
   final ButtonStyle saveButtonStyle = ElevatedButton.styleFrom(
       // ButtonStyle for the save button
-      primary: Colors.black,
-      side: const BorderSide(color: Colors.green, width: 2),
+      primary: theme.backgroundColor,
+      side: BorderSide(color: theme.mainColor, width: 2),
       padding: const EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("New Journal Entry",
-              style: TextStyle(color: Colors.green)),
-          backgroundColor: Colors.black,
+          title: Text("New Journal Entry",
+              style: TextStyle(color: theme.textColor)),
+          backgroundColor: theme.barColor,
+          iconTheme: IconThemeData(color: theme.textColor),
         ),
         body: Center(
             child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
+                decoration: BoxDecoration(
+                  color: theme.backgroundColor,
                 ),
                 child: Column(children: [
                   Row(children: [
@@ -44,21 +46,21 @@ class _AddEntry extends State<AddEntry> {
                         margin:
                             const EdgeInsets.only(left: 20, right: 10, top: 10),
                         child: TextField(
-                          cursorColor: Colors.green,
-                          style: TextStyle(color: Colors.green),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                          cursorColor: theme.mainColor,
+                          style: TextStyle(color: theme.textColor),
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: Colors.green, width: 2),
+                                  BorderSide(color: theme.mainColor, width: 2),
                               //borderRadius: BorderRadius.circular(25.0),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: Colors.green, width: 2),
+                                  BorderSide(color: theme.mainColor, width: 2),
                             ),
                             labelText: 'Title your journal!',
-                            labelStyle: TextStyle(color: Colors.green),
+                            labelStyle: TextStyle(color: theme.textColor),
                           ),
                           onChanged: (String? aTitle) {
                             setState(() {
@@ -69,8 +71,8 @@ class _AddEntry extends State<AddEntry> {
                       ),
                     ),
                     ElevatedButton(
-                      child: const Text('Save',
-                          style: TextStyle(color: Colors.green)),
+                      child: Text('Save',
+                          style: TextStyle(color: theme.textColor)),
                       onPressed: () {
                         if (body == "" || title == "") {
                           showAlertDialog(context); //displays ominous threat
@@ -87,19 +89,19 @@ class _AddEntry extends State<AddEntry> {
                   Container(
                     margin: const EdgeInsets.only(left: 20, right: 10, top: 10),
                     child: TextField(
-                      cursorColor: Colors.green,
+                      cursorColor: theme.mainColor,
                       maxLines: null,
-                      style: TextStyle(color: Colors.green),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      style: TextStyle(color: theme.textColor),
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
                         labelText: 'Tell us about your coffee and coding!',
-                        labelStyle: TextStyle(color: Colors.green),
+                        labelStyle: TextStyle(color: theme.textColor),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green, width: 2),
+                          borderSide: BorderSide(color: theme.mainColor, width: 2),
                           //borderRadius: BorderRadius.circular(25.0),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green, width: 2),
+                          borderSide: BorderSide(color: theme.mainColor, width: 2),
                         ),
                       ),
                       onChanged: (String? aBody) {
@@ -117,15 +119,15 @@ class _AddEntry extends State<AddEntry> {
 /// all fields, thus preventing users from submitting empty journals.
 showAlertDialog(BuildContext context) {
   Widget okButton = TextButton(
-    child: const Text("OK", style: TextStyle(color: Colors.green)),
+    child: Text("OK", style: TextStyle(color: theme.textColor)),
     onPressed: () {
       Navigator.of(context).pop();
     },
   );
   AlertDialog alert = AlertDialog(
-    title: const Text(
+    title: Text(
         "It seems you left a field blank. Please fill it out to save your journal.",
-        style: TextStyle(color: Colors.green)),
+        style: TextStyle(color: theme.textColor)),
     backgroundColor: Colors.black26,
     actions: [
       okButton,

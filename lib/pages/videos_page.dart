@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/pages/VideoPages/brewing_coffee.dart';
 import 'package:the_coffee_and_code/pages/VideoPages/favorite_video.dart';
 import 'package:the_coffee_and_code/pages/VideoPages/lofi_beats.dart';
+import 'package:the_coffee_and_code/pages/settings_page.dart';
 
+import '../main.dart';
 import '../utils/image.dart';
 import '../utils/image_buttons.dart';
 import 'VideoPages/coding_tutorial.dart';
@@ -22,16 +24,17 @@ class _VideosPageState extends State<VideosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Videos", textAlign: TextAlign.center, style: TextStyle(color: Color.fromARGB(225, 0, 255, 0)),),
-        backgroundColor: Colors.black,
+        title: Text("Videos", textAlign: TextAlign.center, style: TextStyle(color: theme.textColor),),
+        backgroundColor: theme.barColor,
+        iconTheme: IconThemeData(color: theme.textColor),
         centerTitle: true,
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.black, Colors.black])),
+                colors: [theme.backgroundColor, theme.backgroundColor])),
         child: SingleChildScrollView(
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -90,13 +93,13 @@ class _VideosPageState extends State<VideosPage> {
         ),
       ),
       drawer: Drawer(
-          backgroundColor: Colors.black,
+          backgroundColor: theme.backgroundColor,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
               ListTile(
-                  title: const Text("Coffee Time", style: TextStyle(color: Colors.green)),
+                  title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
@@ -105,7 +108,7 @@ class _VideosPageState extends State<VideosPage> {
                   }
               ),
               ListTile(
-                  title: const Text("Videos", style: TextStyle(color: Colors.green)),
+                  title: Text("Videos", style: TextStyle(color: theme.textColor)),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
@@ -114,11 +117,20 @@ class _VideosPageState extends State<VideosPage> {
                   }
               ),
               ListTile(
-                title: const Text("Journal", style: TextStyle(color: Colors.green)),
+                title: Text("Journal", style: TextStyle(color: theme.textColor)),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                     return MainJournal();
+                  }));
+                },
+              ),
+              ListTile(
+                title: Text("Settings", style: TextStyle(color: theme.textColor)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    return const SettingsPage();
                   }));
                 },
               )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../main.dart';
 import '../../utils/video_player.dart';
 
 class LofiBeats extends StatelessWidget {
@@ -8,10 +9,11 @@ class LofiBeats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Lofi Beats",
+        title: Text("Lofi Beats",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.green)),
-        backgroundColor: Colors.black,
+            style: TextStyle(color: theme.textColor)),
+        backgroundColor: theme.barColor,
+        iconTheme: IconThemeData(color: theme.textColor),
         centerTitle: true,
       ),
       body: Column(

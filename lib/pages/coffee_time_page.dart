@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/model/BCModel.dart';
 import 'package:the_coffee_and_code/pages/coffee_journal_page.dart';
+import 'package:the_coffee_and_code/pages/settings_page.dart';
 import 'package:the_coffee_and_code/pages/videos_page.dart';
 
+import '../main.dart';
 import '../utils/video_player.dart';
 
 class CoffeeTime extends StatefulWidget {
@@ -22,31 +24,33 @@ class _CoffeeTime extends State<CoffeeTime> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View by Coffee Time'),
+        title: Text('View by Coffee Time', style: TextStyle(color: theme.textColor)),
+        backgroundColor: theme.barColor,
+        iconTheme: IconThemeData(color: theme.textColor),
       ),
       body: Center(
         child: Container(
-          decoration: const BoxDecoration(color: Colors.black),
+          decoration: BoxDecoration(color: theme.backgroundColor),
           child: Column(children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Padding(
                 padding: EdgeInsets.only(left: 60),
                 child: Text('Choose a Time',
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 255, 0),
+                    style: TextStyle(
+                        color: theme.textColor,
                         fontFamily: 'CutiveMono')),
               ),
               Padding(
                 padding: EdgeInsets.only(right: 60),
                 child: DropdownButton<String>(
                     hint: const Text('Choose a Time'),
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 255, 0),
+                    style: TextStyle(
+                        color: theme.textColor,
                         fontFamily: 'CutiveMono'),
-                    dropdownColor: Colors.black,
-                    icon: const Icon(
+                    dropdownColor: theme.backgroundColor,
+                    icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Color.fromARGB(255, 0, 255, 0),
+                      color: theme.mainColor,
                     ),
                     value: timeForCoffee,
                     items: <String>[
@@ -75,21 +79,21 @@ class _CoffeeTime extends State<CoffeeTime> {
               Padding(
                 padding: EdgeInsets.only(left: 60),
                 child: Text('Sort by',
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 255, 0),
+                    style: TextStyle(
+                        color: theme.textColor,
                         fontFamily: 'CutiveMono')),
               ),
               Padding(
                 padding: EdgeInsets.only(right: 60),
                 child: DropdownButton(
                     hint: const Text('Sort by'),
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 255, 0),
+                    style: TextStyle(
+                        color: theme.textColor,
                         fontFamily: 'CutiveMono'),
-                    dropdownColor: Colors.black,
-                    icon: const Icon(
+                    dropdownColor: theme.backgroundColor,
+                    icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Color.fromARGB(255, 0, 255, 0),
+                      color: theme.mainColor,
                     ),
                     value: sortMethod,
                     items: <String>[
@@ -115,13 +119,13 @@ class _CoffeeTime extends State<CoffeeTime> {
         ),
       ),
       drawer: Drawer(
-        backgroundColor: Colors.black,
+        backgroundColor: theme.backgroundColor,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
               ListTile(
-                  title: const Text("Coffee Time", style: TextStyle(color: Colors.green)),
+                  title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
@@ -130,7 +134,7 @@ class _CoffeeTime extends State<CoffeeTime> {
                   }
               ),
               ListTile(
-                  title: const Text("Videos", style: TextStyle(color: Colors.green)),
+                  title: Text("Videos", style: TextStyle(color: theme.textColor)),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
@@ -139,11 +143,20 @@ class _CoffeeTime extends State<CoffeeTime> {
                 }
               ),
               ListTile(
-                title: const Text("Journal", style: TextStyle(color: Colors.green)),
+                title: Text("Journal", style: TextStyle(color: theme.textColor)),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                     return MainJournal();
+                  }));
+                },
+              ),
+              ListTile(
+                title: Text("Settings", style: TextStyle(color: theme.textColor)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    return const SettingsPage();
                   }));
                 },
               )
@@ -158,7 +171,7 @@ class _CoffeeTime extends State<CoffeeTime> {
     return Padding(
         padding: const EdgeInsets.all(1.0),
         child: Card(
-          color: Colors.black,
+          color: theme.backgroundColor,
           child: ListTile(
             title: Text(
               "Cups of Coffee per Day: " +
@@ -166,8 +179,8 @@ class _CoffeeTime extends State<CoffeeTime> {
                   "\n" +
                   "Coding Hours: " +
                   docData['codingHours'],
-              style: const TextStyle(
-                  color: Color.fromARGB(255, 0, 255, 0),
+              style: TextStyle(
+                  color: theme.textColor,
                   fontFamily: 'CutiveMono'),
             ),
           ),
@@ -175,8 +188,8 @@ class _CoffeeTime extends State<CoffeeTime> {
               const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 255, 0), width: 1)),
+              borderSide: BorderSide(
+                  color: theme.mainColor, width: 1)),
         ));
   }
 

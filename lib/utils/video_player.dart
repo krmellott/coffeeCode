@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/model/BCModel.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../main.dart';
+
 
 class VideoPlayer extends StatefulWidget {
   final String collectionPath;
@@ -22,11 +24,11 @@ class _VideoPlayerState extends State<VideoPlayer> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.black, Colors.black])),
+                colors: [theme.backgroundColor, theme.backgroundColor])),
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection(widget.collectionPath)
@@ -50,7 +52,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                       ),
                     );
                     return Card(
-                      color: Colors.black,
+                      color: theme.backgroundColor,
                       child: YoutubePlayerBuilder(
                         player: YoutubePlayer(
                           controller: _controller,
@@ -67,10 +69,10 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                       padding: const EdgeInsets.only(
                                           top: 10, bottom: 10, left: 10),
                                       child: Text(document['name'],
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.green)),
+                                              color: theme.textColor)),
                                     ),
                                   ),
 

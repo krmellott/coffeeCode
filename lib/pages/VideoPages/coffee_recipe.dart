@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../main.dart';
 import '../../utils/video_player.dart';
 
 class CoffeeRecipe extends StatelessWidget {
@@ -8,10 +9,11 @@ class CoffeeRecipe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Coffee Recipes",
+        title: Text("Coffee Recipes",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.green)),
-        backgroundColor: Colors.black,
+            style: TextStyle(color: theme.textColor)),
+        backgroundColor: theme.barColor,
+        iconTheme: IconThemeData(color: theme.textColor),
         centerTitle: true,
       ),
       body: Column(
