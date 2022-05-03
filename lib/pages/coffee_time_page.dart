@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/model/BCModel.dart';
+import 'package:the_coffee_and_code/pages/coffee_journal_page.dart';
+import 'package:the_coffee_and_code/pages/videos_page.dart';
+
+import '../utils/video_player.dart';
 
 class CoffeeTime extends StatefulWidget {
   const CoffeeTime({Key? key}) : super(key: key);
@@ -109,6 +113,42 @@ class _CoffeeTime extends State<CoffeeTime> {
             _sortedData(sortMethod, timeForCoffee, context)
           ]),
         ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.black,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
+              ListTile(
+                  title: const Text("Coffee Time", style: TextStyle(color: Colors.green)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return const CoffeeTime();
+                    }));
+                  }
+              ),
+              ListTile(
+                  title: const Text("Videos", style: TextStyle(color: Colors.green)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    return const VideosPage();
+                  }));
+                }
+              ),
+              ListTile(
+                title: const Text("Journal", style: TextStyle(color: Colors.green)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    return MainJournal();
+                  }));
+                },
+              )
+            ],
+          )
       ),
     );
   }

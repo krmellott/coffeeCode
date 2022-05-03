@@ -4,15 +4,17 @@
 /// @author Spencer Leisch
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:the_coffee_and_code/pages/videos_page.dart';
 import 'package:the_coffee_and_code/utils/add_journal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/controller/BCController.dart';
 
 import '../utils/add_journal_page.dart';
+import '../utils/edit_journal_page.dart';
+import 'coffee_time_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp(options: defaultFirebaseOptions);
   runApp(MainJournal());
 }
 
@@ -37,11 +39,9 @@ class _MainJournal extends State<MainJournal> {
       ),
       body: Center(
         child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.black, Colors.black])),
+          decoration:const BoxDecoration(
+          color: Colors.black,
+        ),
           child: Column(children: [
             const Padding(
               padding: EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 5.0),
@@ -79,7 +79,7 @@ class _MainJournal extends State<MainJournal> {
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.fromLTRB(50.0, 1.0, 50.0, 1.0)),
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                side: MaterialStateProperty.all(BorderSide(color: Colors.green, width: 2))
+                side: MaterialStateProperty.all(const BorderSide(color: Colors.green, width: 2))
               ),
               onPressed: () {
                 Navigator.of(context)
@@ -93,7 +93,42 @@ class _MainJournal extends State<MainJournal> {
           ]),
         ),
       ),
-
+      drawer: Drawer(
+          backgroundColor: Colors.black,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
+              ListTile(
+                  title: const Text("Coffee Time", style: TextStyle(color: Colors.green)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return const CoffeeTime();
+                    }));
+                  }
+              ),
+              ListTile(
+                  title: const Text("Videos", style: TextStyle(color: Colors.green)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return const VideosPage();
+                    }));
+                  }
+              ),
+              ListTile(
+                title: const Text("Journal", style: TextStyle(color: Colors.green)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    return MainJournal();
+                  }));
+                },
+              )
+            ],
+          )
+      ),
     );
   }
 }
@@ -119,7 +154,7 @@ Widget _buildJournalListItem(BuildContext context, DocumentSnapshot document) {
           trailing: Column (
             children: [
               InkWell(
-                child: Icon(Icons.edit, color: Colors.green),
+                child: const Icon(Icons.edit, color: Colors.green),
                 onTap: () {
                   showEditDialog(context, data['title'].toString());
                 },
@@ -128,7 +163,7 @@ Widget _buildJournalListItem(BuildContext context, DocumentSnapshot document) {
                 height: 5,
               ),
               InkWell(
-                child: Icon(Icons.cancel_presentation_sharp, color: Colors.green),
+                child: const Icon(Icons.cancel_presentation_sharp, color: Colors.green),
                 onTap: () {
                   showDeleteDialog(context, data['title'].toString());
                 },
@@ -137,13 +172,12 @@ Widget _buildJournalListItem(BuildContext context, DocumentSnapshot document) {
           ),
           tileColor: Colors.black,
           shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.green, width: 1),
+              side: const BorderSide(color: Colors.green, width: 1),
               borderRadius: BorderRadius.circular(5)),
       ),
     ),
   );
 }
-
 showDeleteDialog(BuildContext context, String title) {
   Widget yesButton = TextButton(
     child: const Text("YES", style: TextStyle(color: Colors.green)),
@@ -174,13 +208,13 @@ showDeleteDialog(BuildContext context, String title) {
     },
   );
 }
-
 showEditDialog(BuildContext context, String title) {
   Widget yesButton = TextButton(
     child: const Text("YES", style: TextStyle(color: Colors.green)),
     onPressed: () {
       //controllerRef.removeJournalData('journal', title);
       Navigator.of(context).pop();
+      return editJournalOpen(title);
     },
   );
   Widget noButton = TextButton(

@@ -7,6 +7,8 @@ import '../utils/image.dart';
 import '../utils/image_buttons.dart';
 import 'VideoPages/coding_tutorial.dart';
 import 'VideoPages/coffee_recipe.dart';
+import 'coffee_journal_page.dart';
+import 'coffee_time_page.dart';
 
 class VideosPage extends StatefulWidget {
   const VideosPage({Key? key}) : super(key: key);
@@ -86,6 +88,42 @@ class _VideosPageState extends State<VideosPage> {
             ],
           ),
         ),
+      ),
+      drawer: Drawer(
+          backgroundColor: Colors.black,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
+              ListTile(
+                  title: const Text("Coffee Time", style: TextStyle(color: Colors.green)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return const CoffeeTime();
+                    }));
+                  }
+              ),
+              ListTile(
+                  title: const Text("Videos", style: TextStyle(color: Colors.green)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return const VideosPage();
+                    }));
+                  }
+              ),
+              ListTile(
+                title: const Text("Journal", style: TextStyle(color: Colors.green)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    return MainJournal();
+                  }));
+                },
+              )
+            ],
+          )
       ),
     );
   }
