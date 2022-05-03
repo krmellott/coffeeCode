@@ -12,6 +12,7 @@ class ImageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Card(
+        color: Colors.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         child: Column(
           // alignment: Alignment.center,
@@ -30,7 +31,7 @@ class ImageButton extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Colors.black,
+                  color: Colors.green,
                 ),
               )
             ]),
