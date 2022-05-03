@@ -1,3 +1,8 @@
+/// coffee_journal_page.dart
+/// Page where users can view all previous journals they have made, as well as
+/// choose to delete them or add a new entry.
+/// @author Spencer Leisch
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:the_coffee_and_code/utils/add_journal_page.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +32,8 @@ class _MainJournal extends State<MainJournal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Journal'),
+        title: const Text('Journal', style: TextStyle(color: Colors.green)),
+        backgroundColor: Colors.black,
       ),
       body: Center(
         child: Container(
@@ -35,15 +41,15 @@ class _MainJournal extends State<MainJournal> {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.lightBlueAccent, Colors.white])),
+                  colors: [Colors.black, Colors.black])),
           child: Column(children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 5.0),
               child: Text("Your Journals", // the title
                   style: TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.green,
                   )),
             ),
             Expanded(
@@ -54,7 +60,7 @@ class _MainJournal extends State<MainJournal> {
                     builder:
                         (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
-                        return Text("We didn't find any journals for you");
+                        return const Text("We didn't find any journals for you");
                       }
                       final data = snapshot.requireData;
                       return ListView.builder(
@@ -71,17 +77,18 @@ class _MainJournal extends State<MainJournal> {
             ),
             OutlinedButton(
               style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.fromLTRB(50.0, 1.0, 50.0, 1.0)),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.fromLTRB(50.0, 1.0, 50.0, 1.0)),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                side: MaterialStateProperty.all(BorderSide(color: Colors.green, width: 2))
               ),
               onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return AddEntry();
+                  return const AddEntry();
                 }));
               },
               //backgroundColor: Colors.green,
-              child: const Text('New Journal Entry', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+              child: const Text('New Journal Entry', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
             )
           ]),
         ),
@@ -100,41 +107,92 @@ Widget _buildJournalListItem(BuildContext context, DocumentSnapshot document) {
     padding: const EdgeInsets.all(1.0),
     child: Card(
       child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
+          contentPadding: const EdgeInsets.fromLTRB(10.0, 5.0, 0.0, 0.0),
           title: Text(data['title'] +
               " --- " +
               date.month.toString() +
               "/" +
               date.day.toString() +
               "/" +
-              date.year.toString()),
-          subtitle: Text(data['body']),
-          trailing: TextButton(
-            child: Icon(Icons.cancel_sharp, color: Colors.red),
-            onPressed: () {
-              showAlertDialog(context, data['title'].toString());
-            },
-          )),
+              date.year.toString(), style: const TextStyle(color: Colors.green),),
+          subtitle: Text(data['body'], style: const TextStyle(color: Colors.green)),
+          trailing: Column (
+            children: [
+              InkWell(
+                child: Icon(Icons.edit, color: Colors.green),
+                onTap: () {
+                  showEditDialog(context, data['title'].toString());
+                },
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                child: Icon(Icons.cancel_presentation_sharp, color: Colors.green),
+                onTap: () {
+                  showDeleteDialog(context, data['title'].toString());
+                },
+              ),
+            ],
+          ),
+          tileColor: Colors.black,
+          shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.green, width: 1),
+              borderRadius: BorderRadius.circular(5)),
+      ),
     ),
   );
 }
 
-showAlertDialog(BuildContext context, String title) {
+showDeleteDialog(BuildContext context, String title) {
   Widget yesButton = TextButton(
-    child: Text("YES"),
+    child: const Text("YES", style: TextStyle(color: Colors.green)),
     onPressed: () {
       controllerRef.removeJournalData('journal', title);
       Navigator.of(context).pop();
     },
   );
   Widget noButton = TextButton(
-    child: Text("NO"),
+    child: const Text("NO", style: TextStyle(color: Colors.green)),
     onPressed: () {
       Navigator.of(context).pop();
     },
   );
   AlertDialog alert = AlertDialog(
-    title: Text("Would you like to delete this journal entry?"),
+    title: const Text("Would you like to delete this journal entry?",
+        style: TextStyle(color: Colors.green)),
+    backgroundColor: Colors.black26,
+    actions: [
+      yesButton,
+      noButton,
+    ],
+  );
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showEditDialog(BuildContext context, String title) {
+  Widget yesButton = TextButton(
+    child: const Text("YES", style: TextStyle(color: Colors.green)),
+    onPressed: () {
+      //controllerRef.removeJournalData('journal', title);
+      Navigator.of(context).pop();
+    },
+  );
+  Widget noButton = TextButton(
+    child: const Text("NO", style: TextStyle(color: Colors.green)),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  AlertDialog alert = AlertDialog(
+    title: const Text("Would you like to edit this journal entry? (Currently non-functional)",
+        style: TextStyle(color: Colors.green)),
+    backgroundColor: Colors.black26,
     actions: [
       yesButton,
       noButton,
