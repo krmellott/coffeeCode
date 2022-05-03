@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/pages/VideoPages/brewing_coffee.dart';
 import 'package:the_coffee_and_code/pages/VideoPages/favorite_video.dart';
@@ -21,7 +20,7 @@ class _VideosPageState extends State<VideosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Videos", textAlign: TextAlign.center, style: TextStyle(color: Colors.green),),
+        title: const Text("Videos", textAlign: TextAlign.center, style: TextStyle(color: Color.fromARGB(225, 0, 255, 0)),),
         backgroundColor: Colors.black,
         centerTitle: true,
       ),
