@@ -10,8 +10,8 @@ class CoffeeTime extends StatefulWidget {
 }
 
 class _CoffeeTime extends State<CoffeeTime> {
-  String timeForCoffee = "";
-  String sortMethod = "";
+  String timeForCoffee = 'In the morning';
+  String sortMethod = 'Coffee cups ascending';
   final reference = BrunchClubModel();
 
   @override
@@ -24,18 +24,27 @@ class _CoffeeTime extends State<CoffeeTime> {
         child: Container(
           decoration: const BoxDecoration(color: Colors.black),
           child: Column(children: [
-            Row(
-              children: [
-                DropdownButton<String>(
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Padding(
+                padding: EdgeInsets.only(left: 60),
+                child: Text('Choose a Time',
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 255, 0),
+                        fontFamily: 'CutiveMono')),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 60),
+                child: DropdownButton<String>(
                     hint: const Text('Choose a Time'),
-                    style:
-                        const TextStyle(color: Color.fromARGB(255, 0, 255, 0),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 255, 0),
                         fontFamily: 'CutiveMono'),
                     dropdownColor: Colors.black,
                     icon: const Icon(
                       Icons.arrow_drop_down,
                       color: Color.fromARGB(255, 0, 255, 0),
                     ),
+                    value: timeForCoffee,
                     items: <String>[
                       'In the morning',
                       'Before coding',
@@ -56,8 +65,29 @@ class _CoffeeTime extends State<CoffeeTime> {
                         timeForCoffee = value.toString();
                       });
                     }),
-                DropdownButton(
+              )
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Padding(
+                padding: EdgeInsets.only(left: 60),
+                child: Text('Sort by',
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 255, 0),
+                        fontFamily: 'CutiveMono')),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 60),
+                child: DropdownButton(
                     hint: const Text('Sort by'),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 255, 0),
+                        fontFamily: 'CutiveMono'),
+                    dropdownColor: Colors.black,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Color.fromARGB(255, 0, 255, 0),
+                    ),
+                    value: sortMethod,
                     items: <String>[
                       'Coffee cups ascending',
                       'Coffee cups descending',
@@ -74,8 +104,8 @@ class _CoffeeTime extends State<CoffeeTime> {
                         sortMethod = sort.toString();
                       });
                     }),
-              ],
-            ),
+              )
+            ]),
             _sortedData(sortMethod, timeForCoffee, context)
           ]),
         ),
@@ -101,7 +131,8 @@ class _CoffeeTime extends State<CoffeeTime> {
                   fontFamily: 'CutiveMono'),
             ),
           ),
-          margin: const EdgeInsets.all(20),
+          margin:
+              const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
@@ -112,30 +143,6 @@ class _CoffeeTime extends State<CoffeeTime> {
   _sortedData(String method, String time, BuildContext buildContext) {
     switch (method) {
       case 'Coffee cups ascending':
-        return Expanded(
-          child: StreamBuilder(
-            stream: reference.orderedUserDataWithSort('coffeeCupsPerDay', true),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                return const Text('Loading');
-              } else {
-                List sortedItems = [];
-                for (int i = 0; i < 100; i++) {
-                  String coffeesTime =
-                      snapshot.data.docs[i]['coffeeTime'].toString();
-                  if (coffeesTime == time) {
-                    sortedItems.add(snapshot.data.docs[i]);
-                  }
-                }
-                return ListView.builder(
-                    itemCount: sortedItems.length,
-                    itemBuilder: (context, index) =>
-                        _displayCupsAndHours(context, sortedItems[index]));
-              }
-            },
-          ),
-        );
-      case 'Coffee cups descending':
         return Expanded(
           child: StreamBuilder(
             stream:
@@ -160,10 +167,34 @@ class _CoffeeTime extends State<CoffeeTime> {
             },
           ),
         );
+      case 'Coffee cups descending':
+        return Expanded(
+          child: StreamBuilder(
+            stream: reference.orderedUserDataWithSort('coffeeCupsPerDay', true),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (!snapshot.hasData) {
+                return const Text('Loading');
+              } else {
+                List sortedItems = [];
+                for (int i = 0; i < 100; i++) {
+                  String coffeesTime =
+                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  if (coffeesTime == time) {
+                    sortedItems.add(snapshot.data.docs[i]);
+                  }
+                }
+                return ListView.builder(
+                    itemCount: sortedItems.length,
+                    itemBuilder: (context, index) =>
+                        _displayCupsAndHours(context, sortedItems[index]));
+              }
+            },
+          ),
+        );
       case 'Coding hours ascending':
         return Expanded(
           child: StreamBuilder(
-            stream: reference.orderedUserDataWithSort('codingHours', true),
+            stream: reference.orderedUserDataWithSort('codingHours', false),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading');
