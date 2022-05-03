@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../model/BCModel.dart';
 
 class StressFreeController {
-  final modelReference = BrunchClubModel();
+  final modelReference = new BrunchClubModel();
   final String _userID = FirebaseAuth.instance.currentUser!.uid;
 
   insertJournalData(String title, int date, String body) {
@@ -13,4 +13,13 @@ class StressFreeController {
   removeJournalData(String collection, String title) {
     modelReference.dbRemoveJournal(collection, title, _userID);
   }
+
+  insertVideo(String title, bool isFavorite, String url) {
+    modelReference.dbInsertVideo(isFavorite, title, url);
+  }
+
+  removeVideo(String collection, String title) {
+    modelReference.dbRemoveVideo(collection, title);
+  }
+
 }
