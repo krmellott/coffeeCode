@@ -3,8 +3,6 @@
 /// choose to delete them or add a new entry.
 /// @author Spencer Leisch
 
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:the_coffee_and_code/pages/settings_page.dart';
 import 'package:the_coffee_and_code/pages/videos_page.dart';
@@ -14,25 +12,29 @@ import 'package:the_coffee_and_code/controller/BCController.dart';
 
 import '../main.dart';
 import '../utils/add_journal_page.dart';
+import '../utils/app_drawer.dart';
 import '../utils/edit_journal_page.dart';
 import 'coffee_time_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MainJournal());
+  runApp(const MainJournal());
 }
+
+
 
 ///important variables
 final journalsRef = FirebaseFirestore.instance.collection('journal');
 final StressFreeController controllerRef = StressFreeController();
 
 class MainJournal extends StatefulWidget {
+  const MainJournal({Key? key}) : super(key: key);
+
   @override
   _MainJournal createState() => _MainJournal();
 }
 
 class _MainJournal extends State<MainJournal> {
-  String dropDownValue = "default";
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class _MainJournal extends State<MainJournal> {
         ),
           child: Column(children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 5.0),
+              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 5.0),
               child: Text("Your Journals", // the title
                   style: TextStyle(
                     fontSize: 25.0,
@@ -98,51 +100,7 @@ class _MainJournal extends State<MainJournal> {
           ]),
         ),
       ),
-      drawer: Drawer(
-          backgroundColor: theme.backgroundColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
-              ListTile(
-                  title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const CoffeeTime();
-                    }));
-                  }
-              ),
-              ListTile(
-                  title: Text("Videos", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const VideosPage();
-                    }));
-                  }
-              ),
-              ListTile(
-                title: Text("Journal", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return MainJournal();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text("Settings", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const SettingsPage();
-                  }));
-                },
-              )
-            ],
-          )
-      ),
+      drawer: getDrawer(context),
     );
   }
 }
@@ -249,7 +207,7 @@ showEditDialog(BuildContext context, String title, String body, int date) {
         style: TextStyle(color: theme.textColor)),
     backgroundColor: theme.backgroundColor,
     shape: BeveledRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
       side: BorderSide(color: theme.mainColor, width: 1.5),
     ),
     actions: [

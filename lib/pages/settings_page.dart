@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:the_coffee_and_code/pages/videos_page.dart';
 
 import '../main.dart';
+import '../utils/app_drawer.dart';
 import 'coffee_journal_page.dart';
 import 'coffee_time_page.dart';
 
@@ -181,51 +182,7 @@ class _SettingsPage extends State<SettingsPage> {
               )
           )
       ),
-      drawer: Drawer(
-          backgroundColor: theme.backgroundColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
-              ListTile(
-                  title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const CoffeeTime();
-                    }));
-                  }
-              ),
-              ListTile(
-                  title: Text("Videos", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const VideosPage();
-                    }));
-                  }
-              ),
-              ListTile(
-                title: Text("Journal", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return MainJournal();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text("Settings", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const SettingsPage();
-                  }));
-                },
-              )
-            ],
-          )
-      ),
+      drawer: getDrawer(context),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../main.dart';
+import '../utils/app_drawer.dart';
 
 class CoffeePage extends StatefulWidget {
   @override
@@ -99,7 +100,9 @@ class _CoffeePage extends State<CoffeePage> {
                     ),
                   ),
                 ]
-                ))));
+                ))),
+    drawer: getDrawer(context),
+    );
   }}
 
     Widget _display(BuildContext context, DocumentSnapshot doc){

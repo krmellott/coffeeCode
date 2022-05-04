@@ -5,6 +5,7 @@ import 'package:the_coffee_and_code/pages/VideoPages/lofi_beats.dart';
 import 'package:the_coffee_and_code/pages/settings_page.dart';
 
 import '../main.dart';
+import '../utils/app_drawer.dart';
 import '../utils/image.dart';
 import '../utils/image_buttons.dart';
 import 'VideoPages/coding_tutorial.dart';
@@ -92,51 +93,7 @@ class _VideosPageState extends State<VideosPage> {
           ),
         ),
       ),
-      drawer: Drawer(
-          backgroundColor: theme.backgroundColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
-              ListTile(
-                  title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const CoffeeTime();
-                    }));
-                  }
-              ),
-              ListTile(
-                  title: Text("Videos", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const VideosPage();
-                    }));
-                  }
-              ),
-              ListTile(
-                title: Text("Journal", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return MainJournal();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text("Settings", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const SettingsPage();
-                  }));
-                },
-              )
-            ],
-          )
-      ),
+      drawer: getDrawer(context),
     );
   }
 

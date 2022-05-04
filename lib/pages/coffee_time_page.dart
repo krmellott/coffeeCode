@@ -6,6 +6,7 @@ import 'package:the_coffee_and_code/pages/settings_page.dart';
 import 'package:the_coffee_and_code/pages/videos_page.dart';
 
 import '../main.dart';
+import '../utils/app_drawer.dart';
 import '../utils/video_player.dart';
 import 'coffee_coffee_page.dart';
 
@@ -119,60 +120,7 @@ class _CoffeeTime extends State<CoffeeTime> {
           ]),
         ),
       ),
-      drawer: Drawer(
-        backgroundColor: theme.backgroundColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
-              ListTile(
-                  title: Text("Coffee Type", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return CoffeePage();
-                    }));
-                  }
-              ),
-              ListTile(
-                  title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return const CoffeeTime();
-                    }));
-                  }
-              ),
-              ListTile(
-                  title: Text("Videos", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const VideosPage();
-                  }));
-                }
-              ),
-              ListTile(
-                title: Text("Journal", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return MainJournal();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text("Settings", style: TextStyle(color: theme.textColor)),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    return const SettingsPage();
-                  }));
-                },
-              )
-            ],
-          )
-      ),
+      drawer: getDrawer(context),
     );
   }
 
