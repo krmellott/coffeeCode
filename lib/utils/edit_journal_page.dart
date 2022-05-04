@@ -2,10 +2,16 @@
 /// A page that allows users to edit previously created journal entries.
 /// The page is accessed from coffee_journal_page.dart.
 /// @author Spencer Leisch
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/BCController.dart';
 import '../main.dart';
+import 'add_journal_page.dart';
+
+String body = "";
+String title = "";
+int date = 0;
 
 class EditEntry extends StatefulWidget {
   const EditEntry({Key? key}) : super(key: key);
@@ -16,8 +22,7 @@ class EditEntry extends StatefulWidget {
 class _EditEntry extends State<EditEntry> {
   StressFreeController controllerRef = StressFreeController();
 
-  String body = "";
-  String title = "";
+
 
   final ButtonStyle saveButtonStyle = ElevatedButton.styleFrom(
     // ButtonStyle for the save button
@@ -45,9 +50,10 @@ class _EditEntry extends State<EditEntry> {
                       child: Container(
                         margin:
                         const EdgeInsets.only(left: 20, right: 10, top: 10),
-                        child: TextField(
+                        child: TextFormField(
                           cursorColor: theme.mainColor,
                           style: TextStyle(color: theme.textColor),
+                          initialValue: title, ///this makes the initial value display as the previous title.
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
@@ -77,10 +83,8 @@ class _EditEntry extends State<EditEntry> {
                         if (body == "" || title == "") {
                           showAlertDialog(context); //displays ominous threat
                         } else {
-                          controllerRef.insertJournalData(body,
-                              DateTime.now().millisecondsSinceEpoch, title);
-                          Navigator.pop(
-                              context); //submits the completed journal
+                          controllerRef.editJournalData(title, date, body);
+                          Navigator.pop(context); //submits the completed journal
                         }
                       },
                       style: saveButtonStyle,
@@ -88,10 +92,11 @@ class _EditEntry extends State<EditEntry> {
                   ]),
                   Container(
                     margin: const EdgeInsets.only(left: 20, right: 10, top: 10),
-                    child: TextField(
+                    child: TextFormField(
                       cursorColor: theme.mainColor,
                       maxLines: null,
                       style: TextStyle(color: theme.textColor),
+                      initialValue: body,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         labelText: 'Tell us about your coffee and coding!',
@@ -115,36 +120,10 @@ class _EditEntry extends State<EditEntry> {
   }
 }
 
-void editJournalOpen(String title) {
-  const EditEntry();
-}
-
-/// Creates and manages the alert dialog that tells users to fill in
-/// all fields, thus preventing users from submitting empty journals.
-showAlertDialog(BuildContext context) {
-  Widget okButton = TextButton(
-    child: Text("OK", style: TextStyle(color: theme.textColor)),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-  AlertDialog alert = AlertDialog(
-    title: Text(
-        "It seems you left a field blank. Please fill it out to save your journal.",
-        style: TextStyle(color: theme.textColor)),
-    backgroundColor: theme.backgroundColor,
-    shape: BeveledRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      side: BorderSide(color: theme.textColor),
-    ),
-    actions: [
-      okButton,
-    ],
-  );
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+openEdit(String prevTitle, String prevBody, int prevDate) {
+  title = prevTitle;
+  body = prevBody;
+  date = prevDate;
+  prevTitle = prevTitle;
+  return const EditEntry();
 }

@@ -45,12 +45,18 @@ class BrunchClubModel {
         .where('title', isEqualTo: title)
         .limit(1)
         .get();
-
     var docID = journalInstance.docs.first.id;
     return await firestoreInstance
         .collection(collection)
         .doc(docID)
         .delete();
+  }
+
+  dbEditJournal(String title, int date, String body, String userID) async {
+    return await firestoreInstance
+        .collection('journal')
+        .doc(date.toString())
+        .set({'body': body, 'title': title, 'date': date, 'userId': '$_uid'});
   }
 
   Future dbInsertVideo(bool isFavorite, String name, String url) async {

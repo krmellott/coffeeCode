@@ -3,6 +3,8 @@
 /// choose to delete them or add a new entry.
 /// @author Spencer Leisch
 
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:the_coffee_and_code/pages/settings_page.dart';
 import 'package:the_coffee_and_code/pages/videos_page.dart';
@@ -168,7 +170,7 @@ Widget _buildJournalListItem(BuildContext context, DocumentSnapshot document) {
               InkWell(
                 child: Icon(Icons.edit, color: theme.mainColor),
                 onTap: () {
-                  showEditDialog(context, data['title'].toString());
+                  showEditDialog(context, data['title'].toString(), data['body'].toString(), data['date']);
                 },
               ),
               const SizedBox(
@@ -190,6 +192,7 @@ Widget _buildJournalListItem(BuildContext context, DocumentSnapshot document) {
     ),
   );
 }
+///shows the "do you want to delete this journal" dialog
 showDeleteDialog(BuildContext context, String title) {
   Widget yesButton = TextButton(
     child: Text("YES", style: TextStyle(color: theme.textColor)),
@@ -209,8 +212,8 @@ showDeleteDialog(BuildContext context, String title) {
         style: TextStyle(color: theme.textColor)),
     backgroundColor: theme.backgroundColor,
     shape: BeveledRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      side: BorderSide(color: theme.textColor),
+      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+      side: BorderSide(color: theme.mainColor, width: 1.5),
     ),
     actions: [
       yesButton,
@@ -224,13 +227,14 @@ showDeleteDialog(BuildContext context, String title) {
     },
   );
 }
-showEditDialog(BuildContext context, String title) {
+///shows the "do you want to edit this journal" dialog
+showEditDialog(BuildContext context, String title, String body, int date) {
   Widget yesButton = TextButton(
     child: Text("YES", style: TextStyle(color: theme.textColor)),
     onPressed: () {
       Navigator.of(context).pop();
       Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-        return const EditEntry();
+        return openEdit(title, body, date);
       }));
     },
   );
@@ -241,12 +245,12 @@ showEditDialog(BuildContext context, String title) {
     },
   );
   AlertDialog alert = AlertDialog(
-    title: Text("Would you like to edit this journal entry? (Currently non-functional)",
+    title: Text("Would you like to edit this journal entry?",
         style: TextStyle(color: theme.textColor)),
     backgroundColor: theme.backgroundColor,
     shape: BeveledRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      side: BorderSide(color: theme.textColor),
+      side: BorderSide(color: theme.mainColor, width: 1.5),
     ),
     actions: [
       yesButton,

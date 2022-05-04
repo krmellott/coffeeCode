@@ -14,6 +14,10 @@ class StressFreeController {
     modelReference.dbRemoveJournal(collection, title, _userID);
   }
 
+  editJournalData(String title, int date, String body) {
+    modelReference.dbEditJournal(title, date, body, _userID);
+  }
+
   insertVideo(String title, bool isFavorite, String url) {
     modelReference.dbInsertVideo(isFavorite, title, url);
   }

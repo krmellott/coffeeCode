@@ -130,8 +130,8 @@ showAlertDialog(BuildContext context) {
         style: TextStyle(color: theme.textColor)),
     backgroundColor: theme.backgroundColor,
     shape: BeveledRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      side: BorderSide(color: theme.textColor),
+      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+      side: BorderSide(color: theme.mainColor, width: 1.5),
     ),
     actions: [
       okButton,
