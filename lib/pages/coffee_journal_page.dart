@@ -207,7 +207,11 @@ showDeleteDialog(BuildContext context, String title) {
   AlertDialog alert = AlertDialog(
     title: Text("Would you like to delete this journal entry?",
         style: TextStyle(color: theme.textColor)),
-    backgroundColor: Colors.black26,
+    backgroundColor: theme.backgroundColor,
+    shape: BeveledRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      side: BorderSide(color: theme.textColor),
+    ),
     actions: [
       yesButton,
       noButton,
@@ -224,9 +228,10 @@ showEditDialog(BuildContext context, String title) {
   Widget yesButton = TextButton(
     child: Text("YES", style: TextStyle(color: theme.textColor)),
     onPressed: () {
-      //controllerRef.removeJournalData('journal', title);
       Navigator.of(context).pop();
-      return editJournalOpen(title);
+      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+        return const EditEntry();
+      }));
     },
   );
   Widget noButton = TextButton(
@@ -238,7 +243,11 @@ showEditDialog(BuildContext context, String title) {
   AlertDialog alert = AlertDialog(
     title: Text("Would you like to edit this journal entry? (Currently non-functional)",
         style: TextStyle(color: theme.textColor)),
-    backgroundColor: Colors.black26,
+    backgroundColor: theme.backgroundColor,
+    shape: BeveledRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      side: BorderSide(color: theme.textColor),
+    ),
     actions: [
       yesButton,
       noButton,

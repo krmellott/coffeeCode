@@ -132,7 +132,11 @@ showAlertDialog(BuildContext context) {
     title: Text(
         "It seems you left a field blank. Please fill it out to save your journal.",
         style: TextStyle(color: theme.textColor)),
-    backgroundColor: Colors.black26,
+    backgroundColor: theme.backgroundColor,
+    shape: BeveledRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      side: BorderSide(color: theme.textColor),
+    ),
     actions: [
       okButton,
     ],
