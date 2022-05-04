@@ -7,6 +7,7 @@ import 'package:the_coffee_and_code/pages/videos_page.dart';
 
 import '../main.dart';
 import '../utils/video_player.dart';
+import 'coffee_coffee_page.dart';
 
 class CoffeeTime extends StatefulWidget {
   const CoffeeTime({Key? key}) : super(key: key);
@@ -124,6 +125,15 @@ class _CoffeeTime extends State<CoffeeTime> {
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(child: Image.asset('assets/BC_CoffeeLogo.png')),
+              ListTile(
+                  title: Text("Coffee Type", style: TextStyle(color: theme.textColor)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return CoffeePage();
+                    }));
+                  }
+              ),
               ListTile(
                   title: Text("Coffee Time", style: TextStyle(color: theme.textColor)),
                   onTap: () {
