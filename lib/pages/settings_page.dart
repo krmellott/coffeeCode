@@ -47,7 +47,7 @@ class _SettingsPage extends State<SettingsPage> {
                                       color: theme.textColor,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: 'CutiveMono')
+                                      fontFamily: 'DroidSansMono')
                               ),
 
                               Switch(
@@ -75,7 +75,7 @@ class _SettingsPage extends State<SettingsPage> {
                                           color: theme.textColor,
                                           fontSize: 25.0,
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'CutiveMono')
+                                          fontFamily: 'DroidSansMono')
                                   ),
 
                                   Row(
@@ -85,7 +85,7 @@ class _SettingsPage extends State<SettingsPage> {
                                                 color: theme.textColor,
                                                 fontSize: 15.0,
                                                 fontWeight: FontWeight.bold,
-                                                fontFamily: 'CutiveMono')
+                                                fontFamily: 'DroidSansMono')
                                         ),
 
                                         OutlinedButton(
@@ -99,7 +99,7 @@ class _SettingsPage extends State<SettingsPage> {
                                             await FirebaseMessaging.instance.subscribeToTopic("coffee");
                                           },
                                           //backgroundColor: Colors.green,
-                                          child: Text('Subscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
+                                          child: Text('Subscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'DroidSansMono')),
                                         ),
 
                                         OutlinedButton(
@@ -113,7 +113,7 @@ class _SettingsPage extends State<SettingsPage> {
                                             await FirebaseMessaging.instance.unsubscribeFromTopic("coffee");
                                           },
                                           //backgroundColor: Colors.green,
-                                          child: Text('Unsubscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
+                                          child: Text('Unsubscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'DroidSansMono')),
                                         )
                                       ]
                                   ),
@@ -125,7 +125,7 @@ class _SettingsPage extends State<SettingsPage> {
                                                 color: theme.textColor,
                                                 fontSize: 15.0,
                                                 fontWeight: FontWeight.bold,
-                                                fontFamily: 'CutiveMono')
+                                                fontFamily: 'DroidSansMono')
                                         ),
 
                                         OutlinedButton(
@@ -139,7 +139,7 @@ class _SettingsPage extends State<SettingsPage> {
                                             await FirebaseMessaging.instance.subscribeToTopic("code");
                                           },
                                           //backgroundColor: Colors.green,
-                                          child: Text('Subscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
+                                          child: Text('Subscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'DroidSansMono')),
                                         ),
 
                                         OutlinedButton(
@@ -153,7 +153,7 @@ class _SettingsPage extends State<SettingsPage> {
                                             await FirebaseMessaging.instance.unsubscribeFromTopic("code");
                                           },
                                           //backgroundColor: Colors.green,
-                                          child: Text('Unsubscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
+                                          child: Text('Unsubscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'DroidSansMono')),
                                         )
 
 
@@ -174,7 +174,7 @@ class _SettingsPage extends State<SettingsPage> {
                             Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
                           },
                           //backgroundColor: Colors.green,
-                          child: Text('Sign Out', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
+                          child: Text('Sign Out', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'DroidSansMono')),
                         )
 
                       ]

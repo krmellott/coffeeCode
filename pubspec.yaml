@@ -73,9 +73,9 @@ flutter:
     - family: BrokenConsole
       fonts:
         - asset: ./assets/BrokenConsoleBold-Yza7v.ttf
-    - family: CutiveMono
+    - family: DroidSansMono
       fonts:
-        - asset: ./assets/CutiveMono-Regular.ttf
+        - asset: assets/DroidSansMono.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

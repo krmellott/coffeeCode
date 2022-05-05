@@ -34,7 +34,7 @@ class _CoffeePage extends State<CoffeePage> {
                       child: Text('Choose a coffee type',
                           style: TextStyle(
                             color: theme.textColor,
-                            fontFamily: 'CutiveMono',
+                            fontFamily: 'DroidSansMono',
                           )),
                     ),
                   ]
@@ -46,7 +46,7 @@ class _CoffeePage extends State<CoffeePage> {
                             hint: const Text('Choose a Time'),
                             style: TextStyle(
                                 color: theme.textColor,
-                                fontFamily: 'CutiveMono'),
+                                fontFamily: 'DroidSansMono'),
                             dropdownColor: theme.backgroundColor,
                             icon: Icon(
                               Icons.arrow_drop_down,
@@ -123,7 +123,7 @@ class _CoffeePage extends State<CoffeePage> {
 
               style: TextStyle(
                   color: theme.textColor,
-                  fontFamily: 'CutiveMono'),
+                  fontFamily: 'DroidSansMono'),
             ),
             ),
           margin:

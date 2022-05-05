@@ -26,7 +26,9 @@ class _CoffeeTime extends State<CoffeeTime> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View by Coffee Time', style: TextStyle(color: theme.textColor)),
+        title: Text(
+            'View by Coffee Time', style: TextStyle(color: theme.textColor,
+            fontFamily: 'DroidSansMono')),
         backgroundColor: theme.barColor,
         iconTheme: IconThemeData(color: theme.textColor),
       ),
@@ -36,19 +38,19 @@ class _CoffeeTime extends State<CoffeeTime> {
           child: Column(children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Padding(
-                padding: EdgeInsets.only(left: 60),
+                padding: const EdgeInsets.only(left: 20),
                 child: Text('Choose a Time',
                     style: TextStyle(
                         color: theme.textColor,
-                        fontFamily: 'CutiveMono')),
+                        fontFamily: 'DroidSansMono')),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 60),
+                padding: const EdgeInsets.only(right: 20),
                 child: DropdownButton<String>(
                     hint: const Text('Choose a Time'),
                     style: TextStyle(
                         color: theme.textColor,
-                        fontFamily: 'CutiveMono'),
+                        fontFamily: 'DroidSansMono'),
                     dropdownColor: theme.backgroundColor,
                     icon: Icon(
                       Icons.arrow_drop_down,
@@ -79,19 +81,19 @@ class _CoffeeTime extends State<CoffeeTime> {
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Padding(
-                padding: EdgeInsets.only(left: 60),
+                padding: const EdgeInsets.only(left: 20),
                 child: Text('Sort by',
                     style: TextStyle(
                         color: theme.textColor,
-                        fontFamily: 'CutiveMono')),
+                        fontFamily: 'DroidSansMono')),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 60),
+                padding: const EdgeInsets.only(right: 20),
                 child: DropdownButton(
                     hint: const Text('Sort by'),
                     style: TextStyle(
                         color: theme.textColor,
-                        fontFamily: 'CutiveMono'),
+                        fontFamily: 'DroidSansMono'),
                     dropdownColor: theme.backgroundColor,
                     icon: Icon(
                       Icons.arrow_drop_down,
@@ -139,11 +141,11 @@ class _CoffeeTime extends State<CoffeeTime> {
                   docData['codingHours'],
               style: TextStyle(
                   color: theme.textColor,
-                  fontFamily: 'CutiveMono'),
+                  fontFamily: 'DroidSansMono'),
             ),
           ),
           margin:
-              const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+          const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
@@ -157,7 +159,7 @@ class _CoffeeTime extends State<CoffeeTime> {
         return Expanded(
           child: StreamBuilder(
             stream:
-                reference.orderedUserDataWithSort('coffeeCupsPerDay', false),
+            reference.orderedUserDataWithSort('coffeeCupsPerDay', false),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 return const Text('Loading');
@@ -165,7 +167,7 @@ class _CoffeeTime extends State<CoffeeTime> {
                 List sortedItems = [];
                 for (int i = 0; i < 100; i++) {
                   String coffeesTime =
-                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  snapshot.data.docs[i]['coffeeTime'].toString();
                   if (coffeesTime == time) {
                     sortedItems.add(snapshot.data.docs[i]);
                   }
@@ -189,7 +191,7 @@ class _CoffeeTime extends State<CoffeeTime> {
                 List sortedItems = [];
                 for (int i = 0; i < 100; i++) {
                   String coffeesTime =
-                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  snapshot.data.docs[i]['coffeeTime'].toString();
                   if (coffeesTime == time) {
                     sortedItems.add(snapshot.data.docs[i]);
                   }
@@ -213,7 +215,7 @@ class _CoffeeTime extends State<CoffeeTime> {
                 List sortedItems = [];
                 for (int i = 0; i < 100; i++) {
                   String coffeesTime =
-                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  snapshot.data.docs[i]['coffeeTime'].toString();
                   if (coffeesTime == time) {
                     sortedItems.add(snapshot.data.docs[i]);
                   }
@@ -237,7 +239,7 @@ class _CoffeeTime extends State<CoffeeTime> {
                 List sortedItems = [];
                 for (int i = 0; i < 100; i++) {
                   String coffeesTime =
-                      snapshot.data.docs[i]['coffeeTime'].toString();
+                  snapshot.data.docs[i]['coffeeTime'].toString();
                   if (coffeesTime == time) {
                     sortedItems.add(snapshot.data.docs[i]);
                   }
