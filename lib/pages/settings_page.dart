@@ -5,12 +5,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:the_coffee_and_code/pages/videos_page.dart';
 
 import '../main.dart';
 import '../utils/app_drawer.dart';
-import 'coffee_journal_page.dart';
-import 'coffee_time_page.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -95,8 +92,13 @@ class _SettingsPage extends State<SettingsPage> {
                                               side: MaterialStateProperty.all(BorderSide(color: theme.mainColor, width: 2))
                                           ),
                                           onPressed: () async {
-                                            print('coffee notifications on');
                                             await FirebaseMessaging.instance.subscribeToTopic("coffee");
+
+                                            const snackBar = SnackBar(
+                                              content: Text('Coffee Notifications On!'),
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                                           },
                                           //backgroundColor: Colors.green,
                                           child: Text('Subscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
@@ -109,8 +111,13 @@ class _SettingsPage extends State<SettingsPage> {
                                               side: MaterialStateProperty.all(BorderSide(color: theme.mainColor, width: 2))
                                           ),
                                           onPressed: () async {
-                                            print('coffee notifications off');
                                             await FirebaseMessaging.instance.unsubscribeFromTopic("coffee");
+
+                                            const snackBar = SnackBar(
+                                              content: Text('Coffee Notifications Off.'),
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                                           },
                                           //backgroundColor: Colors.green,
                                           child: Text('Unsubscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
@@ -135,8 +142,13 @@ class _SettingsPage extends State<SettingsPage> {
                                               side: MaterialStateProperty.all(BorderSide(color: theme.mainColor, width: 2))
                                           ),
                                           onPressed: () async {
-                                            print('code notifications on');
                                             await FirebaseMessaging.instance.subscribeToTopic("code");
+
+                                            const snackBar = SnackBar(
+                                              content: Text('Code Notifications On!'),
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                                           },
                                           //backgroundColor: Colors.green,
                                           child: Text('Subscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
@@ -149,8 +161,13 @@ class _SettingsPage extends State<SettingsPage> {
                                               side: MaterialStateProperty.all(BorderSide(color: theme.mainColor, width: 2))
                                           ),
                                           onPressed: () async {
-                                            print('code notifications off');
                                             await FirebaseMessaging.instance.unsubscribeFromTopic("code");
+
+                                            const snackBar = SnackBar(
+                                              content: Text('Code Notifications Off.'),
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                                           },
                                           //backgroundColor: Colors.green,
                                           child: Text('Unsubscribe', style: TextStyle(fontWeight: FontWeight.bold, color: theme.textColor, fontFamily: 'CutiveMono')),
