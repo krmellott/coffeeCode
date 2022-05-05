@@ -135,10 +135,10 @@ class _CoffeeTime extends State<CoffeeTime> {
           child: ListTile(
             title: Text(
               "Cups of Coffee per Day: " +
-                  docData['coffeeCupsPerDay'] +
+                  docData['coffeeCupsPerDay'].toString() +
                   "\n" +
                   "Coding Hours: " +
-                  docData['codingHours'],
+                  docData['codingHours'].toString(),
               style: TextStyle(
                   color: theme.textColor,
                   fontFamily: 'DroidSansMono'),
