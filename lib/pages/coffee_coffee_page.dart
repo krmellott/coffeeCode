@@ -10,7 +10,7 @@ class CoffeePage extends StatefulWidget {
 }
 
 class _CoffeePage extends State<CoffeePage> {
-  late String coffeeType = 'Americano';
+  String coffeeType = 'Americano';
 
   @override
   Widget build(BuildContext context) {
