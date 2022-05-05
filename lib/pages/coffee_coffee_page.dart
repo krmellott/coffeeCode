@@ -55,7 +55,7 @@ class _CoffeePage extends State<CoffeePage> {
                             value: coffeeType,
                             items: <String>[
                               'Americano',
-                              'Caffe latte',
+                              'Caffè latte',
                               'Cappuccino',
                               'Double Espresso (Doppio)',
                               'Espresso (Short Black)',
