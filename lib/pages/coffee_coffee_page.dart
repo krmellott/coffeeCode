@@ -119,7 +119,7 @@ class _CoffeePage extends State<CoffeePage> {
               "Coffee Type: " + docData['coffeeType'] + "\n" +
               "Cups per day: " + docData['coffeeCupsPerDay'] + "\n" +
               "Coffee Time: " + docData['coffeeTime'] + "\n" +
-              "Coding Hours: " + docData['codingHours'] + "\n",
+              "Coding Hours: " + docData['codingHours'].toString() + "\n",
 
               style: TextStyle(
                   color: theme.textColor,
