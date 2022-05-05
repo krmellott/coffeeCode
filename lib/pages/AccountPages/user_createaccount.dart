@@ -176,6 +176,7 @@ class _CreateAccountState extends State<CreateAccount> {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _userEmail, password: _userPass);
+        Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           _alertDialog(context, 'Your password was too weak!');

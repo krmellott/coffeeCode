@@ -48,7 +48,7 @@ class _SignInState extends State<SignIn> {
                           _createSignUpButton(context),
                           _createForgotPasswordButton(context),
                           _createSendButton(context),
-                          _createAutoSignIn(context)
+                          //_createAutoSignIn(context)
                         ],
                       )))),
                 )));
